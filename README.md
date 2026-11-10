@@ -16,15 +16,27 @@ They are short instructions, not a framework. They follow the Agent Skills forma
 
 ## Install
 
+The quickest way: paste this prompt into any coding agent.
+
+```text
+Install the agent-clarity skills and set them up for me.
+1. Run: npx skills add KirillSachkov/agent-clarity -g -y -a '*'
+2. Find the installed setup-plain-writing skill, read its SKILL.md and follow it: ask me which language to reply in, show me the block for each of my agents' global instructions, and write it only after I agree.
+3. Tell me which files changed and how to undo each change.
+```
+
+By hand:
+
 1. Get the skills:
 
    ```bash
    npx skills add KirillSachkov/agent-clarity
    ```
 
-   Run the same command again to update. In Claude Desktop, upload a skill folder as a zip in the app's skill settings.
+   Update with `npx skills update`. In Claude Desktop, upload a skill folder as a zip in the app's skill settings.
    Or clone the repository and link the folders you want into `~/.claude/skills/` (Claude Code) and `~/.agents/skills/` (Codex, OpenCode and others); links keep you on the latest version.
 2. Run `/setup-plain-writing`, or paste [the block](skills/setup-plain-writing/block.md) into your agent's global instructions yourself. Without the block, agents open `plain-writing` only when its description matches.
+   [An example of full global instructions](docs/example-global-instructions.md) shows the block next to personal preferences.
 
 `recap` uses `gh` to write a PR body. Its pages load Mermaid from cdn.jsdelivr.net; without the network, diagrams stay as text.
 
@@ -44,7 +56,7 @@ The skills use what your app offers: a question dialog with options when the app
 
 ## По-русски
 
-Скиллы, чтобы работу агента было легко понять. `plain-writing` учит агента писать понятно: сначала результат, коротко, слова как в речи разработчиков, все вопросы к вам в одном блоке в конце. Для русского есть отдельный файл правил. `recap` пишет отчёт о сделанной работе: в чат, в описание PR, в файл или страницей. Установка выше, после неё запустите `/setup-plain-writing`. Стиль меняется строкой в своих инструкциях агента, см. «Make it yours».
+Скиллы, чтобы работу агента было легко понять. `plain-writing` учит агента писать понятно: сначала результат, коротко, слова как в речи разработчиков, все вопросы к вам в одном блоке в конце. Для русского есть отдельный файл правил. `recap` пишет отчёт о сделанной работе: в чат, в описание PR, в файл или страницей. Чтобы поставить всё сразу, вставьте агенту промпт из раздела Install. Пример глобальных инструкций лежит в [docs/example-global-instructions.md](docs/example-global-instructions.md). Стиль меняется строкой в своих инструкциях агента, см. «Make it yours».
 
 ## Contributing
 
