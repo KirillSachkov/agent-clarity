@@ -1,7 +1,7 @@
-# Example: global instructions
+# Пример глобальных инструкций
 
-The maintainer's own global instructions, linked for Claude Code (`~/.claude/rules/`), Codex (`~/.codex/AGENTS.md`) and OpenCode (`~/.config/opencode/AGENTS.md`).
-The first section does the job of the block from `setup-plain-writing`; the second holds personal working preferences. Take what fits and write your own.
+Это настоящие глобальные инструкции автора. Ссылки на этот файл стоят для Claude Code (`~/.claude/rules/`), Codex (`~/.codex/AGENTS.md`) и OpenCode (`~/.config/opencode/AGENTS.md`).
+Первый раздел делает то же, что блок из `setup-plain-writing`. Во втором лежат личные настройки работы. Возьми то, что подходит, и напиши свои.
 
 ```markdown
 # Writing to Kirill

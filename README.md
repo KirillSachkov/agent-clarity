@@ -1,67 +1,67 @@
 # agent-clarity
 
-Skills that make a coding agent's work easy to understand: clear writing, clear reports.
+Скиллы, чтобы работу кодинг-агента было легко понять: агент пишет понятным русским и сдаёт работу ясным отчётом.
 
-They are short instructions, not a framework. They follow the Agent Skills format, so they work in Claude Code, Claude Desktop, Codex, OpenCode, Cursor and other agents that read skills.
+Это короткие инструкции, а не фреймворк. Они в формате Agent Skills, поэтому работают в Claude Code, Claude Desktop, Codex, OpenCode, Cursor и других агентах, которые читают скиллы.
 
-## Skills
+## Скиллы
 
-| Skill | What it does |
+| Скилл | Что делает |
 |---|---|
-| [`plain-writing`](skills/plain-writing/SKILL.md) | Every text a person reads, written the way a good colleague explains out loud: result first, brief by default, decisions in one closing block. General rules, plus a Russian file. |
-| [`recap`](skills/recap/SKILL.md) | A report of finished work: verdict, what was done, how it was checked, what you must decide. One Markdown text serves as a chat reply, a PR body, a file or a page. |
-| [`setup-plain-writing`](skills/setup-plain-writing/SKILL.md) | Run once by hand: adds the short block that makes your agents open `plain-writing` before the first reply. |
+| [`plain-writing`](skills/plain-writing/SKILL.md) | Любой текст для человека агент пишет так, как хороший коллега объясняет вслух: сначала результат, коротко, все решения в одном блоке в конце. Общие правила и отдельный файл для русского. |
+| [`recap`](skills/recap/SKILL.md) | Отчёт о законченной работе: итог, что сделано, как проверено, что решить. Один текст на Markdown годится для ответа в чате, описания PR, файла или страницы. |
+| [`setup-plain-writing`](skills/setup-plain-writing/SKILL.md) | Запускается один раз вручную. Вписывает в глобальные инструкции агента короткий блок, после которого агент открывает `plain-writing` перед первым ответом. |
 
-[`explain`](skills/in-progress/explain/SKILL.md), pages of diagrams drawn from the code, is in progress; the installer skips it.
+Скилл [`explain`](skills/in-progress/explain/SKILL.md) рисует схемы по коду. Он ещё в работе, установщик его не ставит.
 
-## Install
+## Установка
 
-The quickest way: paste this prompt into any coding agent.
+Проще всего вставить любому кодинг-агенту этот промпт:
 
 ```text
-Install the agent-clarity skills and set them up for me.
-1. Run: npx skills add KirillSachkov/agent-clarity -g -y -a '*'
-2. Find the installed setup-plain-writing skill, read its SKILL.md and follow it: ask me which language to reply in, show me the block for each of my agents' global instructions, and write it only after I agree.
-3. Tell me which files changed and how to undo each change.
+Поставь скиллы agent-clarity и настрой их для меня.
+1. Запусти: npx skills add KirillSachkov/agent-clarity -g -y -a '*'
+2. Найди установленный скилл setup-plain-writing, прочитай его SKILL.md и сделай по нему: спроси, на каком языке мне отвечать, покажи блок для глобальных инструкций каждого моего агента и запиши его только после моего согласия.
+3. Скажи, какие файлы ты поменял и как отменить каждую правку.
 ```
 
-By hand:
+Вручную:
 
-1. Get the skills:
+1. Поставь скиллы:
 
    ```bash
    npx skills add KirillSachkov/agent-clarity
    ```
 
-   Update with `npx skills update`. In Claude Desktop, upload a skill folder as a zip in the app's skill settings.
-   Or clone the repository and link the folders you want into `~/.claude/skills/` (Claude Code) and `~/.agents/skills/` (Codex, OpenCode and others); links keep you on the latest version.
-2. Run `/setup-plain-writing`, or paste [the block](skills/setup-plain-writing/block.md) into your agent's global instructions yourself. Without the block, agents open `plain-writing` only when its description matches.
-   [An example of full global instructions](docs/example-global-instructions.md) shows the block next to personal preferences.
+   Обновление: `npx skills update`. В Claude Desktop скилл загружают архивом с папкой скилла в настройках приложения.
+   Другой способ: склонировать репозиторий и сделать ссылки на нужные папки в `~/.claude/skills/` для Claude Code и в `~/.agents/skills/` для Codex, OpenCode и других. Со ссылками у тебя всегда последняя версия.
+2. Запусти `/setup-plain-writing` или сам вставь [блок](skills/setup-plain-writing/block.md) в глобальные инструкции агента. Без блока агент откроет `plain-writing`, только если сам решит, что скилл подходит к задаче.
+   [Пример полных глобальных инструкций](docs/example-global-instructions.md) показывает блок рядом с личными настройками.
 
-`recap` uses `gh` to write a PR body. Its pages load Mermaid from cdn.jsdelivr.net; without the network, diagrams stay as text.
+`recap` пишет описание PR через `gh`. Страницы отчёта загружают Mermaid с cdn.jsdelivr.net, без сети схемы остаются текстом.
 
-## Make it yours
+## Свой стиль
 
-The rules are defaults. Your global or project instructions win over them, so change the style there, not in the skill files that an update replaces:
-add a line to the block, for example «Пиши без таблиц» or "Use no emoji".
+Правила скиллов работают по умолчанию. Твои глобальные или проектные инструкции важнее их, поэтому стиль меняют там, а не в файлах скилла: обновление их перезапишет.
+Достаточно дописать строку в блок, например «Пиши без таблиц» или «Без эмодзи».
 
-For another language, the general rules work alone. To add its words and punctuation, add `skills/plain-writing/references/<lang>.md` in a fork or send a PR.
+Для другого языка хватит общих правил. Чтобы добавить его слова и пунктуацию, положи `skills/plain-writing/references/<язык>.md` в своём форке или пришли PR.
 
-The skills use what your app offers: a question dialog with options when the app has one, links in the form the app makes clickable, pages shown inside the chat where the app can show them.
+Скиллы пользуются возможностями приложения. Если в нём есть окно вопроса с вариантами, агент задаёт вопросы через него. Ссылки он даёт в том виде, по которому в приложении можно кликнуть. Страницу отчёта он показывает прямо в чате, если приложение это умеет.
 
-## How they fit together
+## Как они связаны
 
-- `plain-writing` decides how text reads. Your global instructions tell the agent to open it before the first reply.
-- `recap` decides what a report holds and where it goes; its prose comes from `plain-writing`. Your pipeline decides when to write one: on request, in the PR step, or at acceptance.
+- `plain-writing` решает, как читается текст. Глобальные инструкции говорят агенту открыть его перед первым ответом.
+- `recap` решает, что входит в отчёт и куда он попадает, а текст пишет по `plain-writing`. Когда писать отчёт, решает твой процесс: по просьбе, на шаге PR или при приёмке.
 
-## По-русски
+## Участие
 
-Скиллы, чтобы работу агента было легко понять. `plain-writing` учит агента писать понятно: сначала результат, коротко, слова как в речи разработчиков, все вопросы к вам в одном блоке в конце. Для русского есть отдельный файл правил. `recap` пишет отчёт о сделанной работе: в чат, в описание PR, в файл или страницей. Чтобы поставить всё сразу, вставьте агенту промпт из раздела Install. Пример глобальных инструкций лежит в [docs/example-global-instructions.md](docs/example-global-instructions.md). Стиль меняется строкой в своих инструкциях агента, см. «Make it yours».
+Открой issue или PR. `python3 scripts/check.py` должен напечатать OK, CI запускает его на каждом PR.
 
-## Contributing
+## In English
 
-Open an issue or a PR. `python3 scripts/check.py` must print OK; CI runs it on every PR.
+Agent skills for clear writing (`plain-writing`) and clear recaps of finished work (`recap`). The skills themselves are in English and work for any language; Russian has its own rules file. Install with `npx skills add KirillSachkov/agent-clarity`, then run `/setup-plain-writing`.
 
-## License
+## Лицензия
 
 MIT
